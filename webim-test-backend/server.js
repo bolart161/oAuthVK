@@ -28,17 +28,14 @@ app.get('/auth/vkontakte/callback', cors(), function(req, res) {
 
 	console.log(code);
 	if (code !== undefined) {
-		if (req.query.client_secret === undefined) {
+		console.log(req.query);
+		if (req.query.client_secret) {
 			const url = 'https://oauth.vk.com/access_token?client_id=7040403&client_secret=SJrmcvaarjNDIJnRm7qe&redirect_uri=http://bolart.ru:3000/auth/vkontakte/callback&code=' + code;
 			// res.redirect(url);
 
 			axios.get(url)
 				.then((response) => {
-					return response.data;
-				})
-				.then((data) => {
-					token = data.access_token;
-					id = data.user_id;
+					console.log(response.data);
 				})
 				.catch(console.log('Error'));
 		} else {
