@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const https = require('https');
+const axios = require('axios');
 
 let app = express();
 let passport = require('passport');
@@ -23,13 +23,17 @@ app.get('/auth/vkontakte/callback', function(req, res) {
 	const code = req.query.code,
 		url = 'https://oauth.vk.com/access_token?client_id=7040403&client_secret=SJrmcvaarjNDIJnRm7qe&redirect_uri=http://bolart.ru&code=' + code;
 
-	if (code === undefined) {
-		res.redirect('/');
-	}
+	console.log(code);
 
-	https.get(url, (resp) => {
-		console.log(resp);
-	});
+	axios.get(url)
+		.then(response => {
+			console.log(response.data.url);
+			console.log(response.data.explanation);
+		})
+		.catch(error => {
+			console.log(error);
+		});
+
 });
 
 app.listen(3000);
