@@ -28,15 +28,16 @@ app.get('/auth/vkontakte/callback', cors(), function(req, res) {
 	console.log(code);
 	if (code !== undefined) {
 		const url = 'https://oauth.vk.com/access_token?client_id=7040403&client_secret=SJrmcvaarjNDIJnRm7qe&redirect_uri=http://bolart.ru:3000/auth/vkontakte/callback&code=' + code;
-		axios.get(url)
-			.then((response) => {
-				return response.data;
-			})
-			.then((data) => {
-				token = data.access_token;
-				id = data.user_id;
-			})
-			.catch(console.log('Error'));
+		res.redirect(url);
+		// axios.get(url)
+		// 	.then((response) => {
+		// 		return response.data;
+		// 	})
+		// 	.then((data) => {
+		// 		token = data.access_token;
+		// 		id = data.user_id;
+		// 	})
+		// 	.catch(console.log('Error'));
 	} else {
 		let url = 'https://oauth.vk.com/authorize?' +
 			'client_id=7040403&' +
@@ -45,9 +46,6 @@ app.get('/auth/vkontakte/callback', cors(), function(req, res) {
 			'response_type=code';
 		res.redirect(url);
 	}
-
-	console.log( {token , id} );
-
 });
 
 app.get('/auth/vk/token', function(req, res){
