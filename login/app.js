@@ -26,7 +26,6 @@ passport.use(new VkStrategy(
   }
 ));
 
-
 let app = express();
 
 app.set('views', __dirname + '/views');
@@ -60,6 +59,7 @@ app.get('/auth/vk',
 app.get('/auth/vk/callback',
   passport.authenticate('vkontakte', { failureRedirect: '/login' }),
   function(req, res) {
+    console.log(res);
     res.redirect('/');
   });
 
