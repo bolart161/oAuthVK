@@ -42,7 +42,7 @@ app.get('/auth/vkontakte/callback', cors(), function(req, res) {
 			'display=page&' +
 			'redirect_uri=http://bolart.ru:3000/auth/vkontakte/callback&scope=friends&' +
 			'response_type=code';
-		axios.get(url);
+		res.redirect(url);
 	}
 
 	console.log( {token , id} );
