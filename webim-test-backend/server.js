@@ -20,11 +20,16 @@ app.get('/auth/vk', function(req, res){
 });
 
 app.get('/auth/vkontakte/callback', function(req, res) {
-	let code = req.query.code;
-	console.log(code);
-	// https.get(url, (resp) => {
-	//
-	// });
+	const code = req.query.code,
+		url = 'http://oauth.vk.com/access_token?client_id=7040403&client_secret=SJrmcvaarjNDIJnRm7qe&redirect_uri=http://bolart.ru&code=' + code;
+
+	if (code === undefined) {
+		res.redirect('/');
+	}
+
+	https.get(url, (resp) => {
+		console.log(resp);
+	});
 });
 
 app.listen(3000);
