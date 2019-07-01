@@ -20,7 +20,8 @@ app.get('/auth/vk', function(req, res){
 });
 
 app.get('/auth/vkontakte/callback', function(req, res) {
-
+	let code = req.query.code;
+	console.log(code);
 	// https.get(url, (resp) => {
 	//
 	// });
