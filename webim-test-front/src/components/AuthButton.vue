@@ -20,7 +20,7 @@ const axios = require('axios');
 
 function getToken(code) {
   axios
-    .get('https://oauth.vk.com/access_token?client_id=7040403&client_secret=SJrmcvaarjNDIJnRm7qe&redirect_uri=http://bolart.ru&code=' + code + '&callback=saveToken')
+    .get('http://oauth.vk.com/access_token?client_id=7040403&client_secret=SJrmcvaarjNDIJnRm7qe&redirect_uri=http://bolart.ru&code=' + code)
     .then(response => console.log(response))
     .catch(() => [])
 };
