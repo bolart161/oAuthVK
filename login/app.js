@@ -39,19 +39,23 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/', function(req, res){
-  axios.get('https://api.vk.com/method/friends.get?' +
-    'user_id=' + req.user.id +
-    '&order=name' +
-    '&count=5' +
-    '&fields=nickname' +
-    '&v=5.100' +
-    '&access_token=f100705df100705df100705d6af16b1dceff100f100705dac1a409457c2a484fe9a13cf')
-    .then(resp => {
-      res.render('index', {
-        user: req.user,
-        friends: resp.data.response.items,
+  if (req.user.id !== undefined) {
+    axios.get('https://api.vk.com/method/friends.get?' +
+      'user_id=' + req.user.id +
+      '&order=name' +
+      '&count=5' +
+      '&fields=nickname' +
+      '&v=5.100' +
+      '&access_token=f100705df100705df100705d6af16b1dceff100f100705dac1a409457c2a484fe9a13cf')
+      .then(resp => {
+        res.render('index', {
+          user: req.user,
+          friends: resp.data.response.items,
+        });
       });
-    });
+  } else {
+    res.render('index');
+  }
 });
 
 app.get('/account', ensureAuthenticated, function(req, res){
