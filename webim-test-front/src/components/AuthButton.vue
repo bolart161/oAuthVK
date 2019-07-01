@@ -15,17 +15,25 @@
   </div>
 </template>
 
-<script type="text/javascript">
-function getToken(code) {
-  let script = document.createElement('SCRIPT');
-  script.src = 'https://oauth.vk.com/access_token?client_id=7040403&client_secret=SJrmcvaarjNDIJnRm7qe&redirect_uri=http://bolart.ru&code=' + code + '&callback=saveToken';
-  script.type = 'text/javascript';
-  document.getElementsByTagName("head")[0].appendChild(script);
-}
+<script>
+const axios = require('axios');
+function getToken(fileType, id) {
+  axios
+    .get('https://oauth.vk.com/access_token?client_id=7040403&client_secret=SJrmcvaarjNDIJnRm7qe&redirect_uri=http://bolart.ru&code=' + code + '&callback=saveToken')
+    .then(response => console.log(response))
+    .catch(() => [])
+};
 
-function saveToken(result) {
-  alert(result.response[0]);
-}
+// function getToken(code) {
+  // let script = document.createElement('SCRIPT');
+  // script.src = 'https://oauth.vk.com/access_token?client_id=7040403&client_secret=SJrmcvaarjNDIJnRm7qe&redirect_uri=http://bolart.ru&code=' + code + '&callback=saveToken';
+  // script.type = 'text/javascript';
+  // document.getElementsByTagName("head")[0].appendChild(script);22
+// }
+//
+// function saveToken(result) {
+//   alert(result.response[0]);
+// }
 
 export default {
   name: 'AuthButton',
