@@ -63,9 +63,8 @@ app.get('/auth/vk',
 app.get('/auth/vk/callback',
   passport.authenticate('vkontakte', { failureRedirect: '/login' }),
   function(req, res) {
-
-        res.redirect('/');
-      //});
+    res.friends = 'asdasd, asdasd ,asda sd,asd ';
+    res.redirect('/');
 });
 
 app.get('/logout', function(req, res){
