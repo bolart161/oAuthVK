@@ -54,7 +54,7 @@ app.get('/', function(req, res){
         });
       });
   } else {
-    res.render('index');
+    res.render('index', { user: req.user });
   }
 });
 
