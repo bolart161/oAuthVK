@@ -40,7 +40,8 @@ app.use(passport.session());
 
 app.get('/', function(req, res){
   axios.get('https://api.vk.com/method/friends.get?' +
-    'user_id=112774449&order=name' +
+    'user_id=' + req.user.id +
+    '&order=name' +
     '&count=5' +
     '&fields=nickname' +
     '&v=5.100' +
@@ -70,7 +71,6 @@ app.get('/auth/vk',
 app.get('/auth/vk/callback',
   passport.authenticate('vkontakte', { failureRedirect: '/login' }),
   function(req, res) {
-    res.friends = 'asdasd, asdasd ,asda sd,asd ';
     res.redirect('/');
 });
 
