@@ -28,7 +28,13 @@
 
     <div>
         <h2>Друзья</h2>
-        <div id="friends"><% friends %><div>
+        <div id="friends"><%
+            for (item in user.friends) {
+            	item.first_name + ' ' + item.last_name %>
+            фывыфв
+            <%
+            }
+        %><div>
     </div>
 
 <% } %>
