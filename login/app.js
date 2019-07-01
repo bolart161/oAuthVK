@@ -46,9 +46,9 @@ app.get('/', function(req, res){
     '&v=5.100' +
     '&access_token=f100705df100705df100705d6af16b1dceff100f100705dac1a409457c2a484fe9a13cf')
     .then(resp => {
-      req.user.friends = resp.data.response.items;
       res.render('index', {
         user: req.user,
+        friends: resp.data.response.items,
       });
     });
 });
