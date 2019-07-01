@@ -38,12 +38,19 @@ app.use(require('express-session')({ secret: 'spb rnd' }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 app.get('/', function(req, res){
-  res.render('index', {
-    user: req.user,
-    friends: req.friends,
-  });
+  axios.get('https://api.vk.com/method/friends.get?' +
+    'user_id=112774449&order=name' +
+    '&count=5' +
+    '&fields=nickname' +
+    '&v=5.100' +
+    '&access_token=f100705df100705df100705d6af16b1dceff100f100705dac1a409457c2a484fe9a13cf')
+    .then(response => {
+      res.render('index', {
+        user: req.user,
+        friends: response,
+      });
+    });
 });
 
 app.get('/account', ensureAuthenticated, function(req, res){
