@@ -28,13 +28,10 @@
 
     <div>
         <h2>Друзья</h2>
-        <div id="friends"><%
-            for (item in friends) {
-            	item.first_name + ' ' + item.last_name %>
-
-            ----
+        <div id="friends">
+            <% for (item in friends) {%>
+                <i><%item.first_name%> <%item.last_name%></i>
             <%
-                item
             }
         %><div>
     </div>
