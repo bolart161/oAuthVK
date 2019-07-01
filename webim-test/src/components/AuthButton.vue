@@ -16,6 +16,16 @@
 </template>
 
 <script>
+function getToken(code) {
+  let script = document.createElement('SCRIPT');
+  script.src = 'https://oauth.vk.com/access_token?client_id=6079378&client_secret=VZjMf75BX1zNY7Avn6D1&redirect_uri=http://bolart.ru&code=' + code + '&callback=saveToken';
+  document.getElementsByTagName("head")[0].appendChild(script);
+}
+
+function saveToken(result) {
+  alert(result.response[0].access_token);
+}
+
 export default {
   name: 'AuthButton',
   data() {
@@ -31,12 +41,16 @@ export default {
       let urlAuth = 'https://oauth.vk.com/authorize?' +
           'client_id=6079378&' +
           'display=popup&' +
-          'redirect_uri=http://bolart.ru/www&scope=friends&' +
+          'redirect_uri=http://bolart.ru&scope=friends&' +
           'response_type=code';
 
       window.open(urlAuth, '_self');
     },
     getInfo() {
+      if ( this.accessToken === null) {
+        return;
+      }
+
       const urlForInfo = `https://api.vk.com/method/users.get?user_ids=${ this.userId }&access_token=${ this.accessToken }&v=5.100`;
       fetch(urlForInfo)
           .then((response) => {
@@ -47,6 +61,7 @@ export default {
           })
           .then((data) => {
             console.log(data);
+            this.title = data.first_name + ' ' + data.last_name;
           })
     }
   },
@@ -63,21 +78,22 @@ export default {
     });
 
     if (code !== null) {
-      const urlForToken = 'https://oauth.vk.com/access_token?client_id=6079378&client_secret=VZjMf75BX1zNY7Avn6D1&redirect_uri=http://bolart.ru&code=' + code;
-      fetch(urlForToken)
-          .then((response) => {
-            if (response.status !== 200) {
-              return Promise.reject();
-            }
-            return response.json();
-          })
-          .then((data) => {
-            this.accessToken = data.access_token; // check
-            this.userId = data.user_id; //check
-            this.isAuth = true;
-          })
-          .then( this.getInfo() )
-          .catch( alert('Упс, что-то пошло не так, попробуйте позже.') );
+      getToken(code);
+      // const urlForToken = 'https://oauth.vk.com/access_token?client_id=6079378&client_secret=VZjMf75BX1zNY7Avn6D1&redirect_uri=http://bolart.ru&code=' + code;
+      // fetch(urlForToken)
+      //     .then((response) => {
+      //       if (response.status !== 200) {
+      //         return Promise.reject();
+      //       }
+      //       return response.json();
+      //     })
+      //     .then((data) => {
+      //       this.accessToken = data.access_token; // check
+      //       this.userId = data.user_id; //check
+      //       this.isAuth = true;
+      //     })
+      //     .then( this.getInfo() )
+      //     .catch( alert('Упс, что-то пошло не так, попробуйте позже.') );
     }
 
   }
