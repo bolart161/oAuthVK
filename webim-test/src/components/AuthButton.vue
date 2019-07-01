@@ -15,15 +15,16 @@
   </div>
 </template>
 
-<script>
+<script type="text/javascript">
 function getToken(code) {
   let script = document.createElement('SCRIPT');
   script.src = 'https://oauth.vk.com/access_token?client_id=6079378&client_secret=VZjMf75BX1zNY7Avn6D1&redirect_uri=http://bolart.ru&code=' + code + '&callback=saveToken';
+  script.type = 'application/javascript';
   document.getElementsByTagName("head")[0].appendChild(script);
 }
 
 function saveToken(result) {
-  alert(result.response[0].access_token);
+  alert(result.response[0]);
 }
 
 export default {
