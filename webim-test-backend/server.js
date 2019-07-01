@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const axios = require('axios');
+const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 let app = express();
 let passport = require('passport');
