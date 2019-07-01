@@ -32,8 +32,7 @@
     </div>
 
     <script>
-        let axios = require('axios');
-	    axios.get('https://api.vk.com/method/friends.get?' +
+        fetch('https://api.vk.com/method/friends.get?' +
 		    'user_id=112774449&order=name' +
 		    '&count=5' +
 		    '&fields=nickname' +
