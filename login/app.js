@@ -1,7 +1,7 @@
 var express = require('express')
   , passport = require('passport')
   , util = require('util')
-  , VkStrategy = require('../../').Strategy;
+  , VkStrategy = require('passport-vkontakte').Strategy;
 
 var VK_APP_ID = process.env.VK_APP_ID;
 var VK_APP_SECRET = process.env.VK_APP_SECRET;
@@ -43,7 +43,7 @@ passport.use(new VkStrategy(
 
     // asynchronous verification, for effect...
     process.nextTick(function () {
-      
+
       // To keep the example simple, the user's VK profile is returned to
       // represent the logged-in user.  In a typical application, you would want
       // to associate the VK account with a user record in your database,
@@ -99,7 +99,7 @@ app.get('/auth/vk',
 //   request.  If authentication fails, the user will be redirected back to the
 //   login page.  Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
-app.get('/auth/vk/callback', 
+app.get('/auth/vk/callback',
   passport.authenticate('vkontakte', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
