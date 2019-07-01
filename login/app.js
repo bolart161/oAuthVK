@@ -3,8 +3,8 @@ var express = require('express')
   , util = require('util')
   , VkStrategy = require('passport-vkontakte').Strategy;
 
-var VK_APP_ID = process.env.VK_APP_ID;
-var VK_APP_SECRET = process.env.VK_APP_SECRET;
+var VK_APP_ID = '7040403';
+var VK_APP_SECRET = 'SJrmcvaarjNDIJnRm7qe';
 
 if (!VK_APP_ID || !VK_APP_SECRET) {
     throw new Error('Set VK_APP_ID and VK_APP_SECRET env vars to run the example');
