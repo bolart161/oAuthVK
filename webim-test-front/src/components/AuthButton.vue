@@ -17,13 +17,22 @@
 
 <script>
 const axios = require('axios');
+import $ from "jquery";
 
 function getToken(code) {
-  axios
-    .get('http://oauth.vk.com/access_token?client_id=7040403&client_secret=SJrmcvaarjNDIJnRm7qe&redirect_uri=http://bolart.ru&code=' + code)
-    .then(response => console.log(response))
-    .catch(() => [])
-};
+  $.ajax({
+    url: 'http://oauth.vk.com/access_token?client_id=7040403&client_secret=SJrmcvaarjNDIJnRm7qe&redirect_uri=http://bolart.ru&code=' + code,
+    method: 'GET',
+    dataType: 'JSONP',
+    success: function (data) {
+      console.log(data);
+    },
+  });
+  // axios
+  //   .get('http://oauth.vk.com/access_token?client_id=7040403&client_secret=SJrmcvaarjNDIJnRm7qe&redirect_uri=http://bolart.ru&code=' + code)
+  //   .then(response => console.log(response))
+  //   .catch(() => [])
+}
 
 // function getToken(code) {
   // let script = document.createElement('SCRIPT');
