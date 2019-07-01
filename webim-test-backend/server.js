@@ -17,30 +17,35 @@ app.get('/auth/vk', function(req, res){
 		'display=page&' +
 		'redirect_uri=http://bolart.ru:3000/auth/vkontakte/callback&scope=friends&' +
 		'response_type=code';
-	axios.get(url)
-		.then((response) => {
-			console.log( response );
-		})
-		.then((data) => {
-
-		})
-		.catch(console.log('Error'));
-
+	axios.get(url);
 });
 
 app.get('/auth/vkontakte/callback', cors(), function(req, res) {
-	const code = req.query.code,
-		url = 'https://oauth.vk.com/access_token?client_id=7040403&client_secret=SJrmcvaarjNDIJnRm7qe&redirect_uri=http://bolart.ru:3000/auth/vkontakte/callback&code=' + code;
+	const code = req.query.code;
+	let token = '',
+		id = '';
 
-	axios.get(url)
-		.then((response) => {
-			return response.data;
-		})
-		.then((data) => {
+	if (code !== undefined) {
+		const url = 'https://oauth.vk.com/access_token?client_id=7040403&client_secret=SJrmcvaarjNDIJnRm7qe&redirect_uri=http://bolart.ru:3000/auth/vkontakte/callback&code=' + code;
+		axios.get(url)
+			.then((response) => {
+				return response.data;
+			})
+			.then((data) => {
+				token = data.access_token;
+				id = data.user_id;
+			})
+			.catch(console.log('Error'));
+	} else {
+		let url = 'https://oauth.vk.com/authorize?' +
+			'client_id=7040403&' +
+			'display=page&' +
+			'redirect_uri=http://bolart.ru:3000/auth/vkontakte/callback&scope=friends&' +
+			'response_type=code';
+		axios.get(url);
+	}
 
-		})
-		.catch(console.log('Error'));
-
+	console.log( {token , id} );
 
 });
 
