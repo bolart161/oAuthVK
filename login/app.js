@@ -39,7 +39,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/', function(req, res){
-  if (req.user.id !== undefined) {
+  if (req.user !== undefined) {
     axios.get('https://api.vk.com/method/friends.get?' +
       'user_id=' + req.user.id +
       '&order=name' +
