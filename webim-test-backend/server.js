@@ -15,7 +15,7 @@ app.get('/auth/vk', function(req, res){
 	res.redirect('https://oauth.vk.com/authorize?' +
 		'client_id=7040403&' +
 		'display=page&' +
-		'redirect_uri=http://bolart.ru/auth/vkontakte/callback&scope=friends&' +
+		'redirect_uri=http://bolart.ru:3000/auth/vkontakte/callback&scope=friends&' +
 		'response_type=code');
 });
 
