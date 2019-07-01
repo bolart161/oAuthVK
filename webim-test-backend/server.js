@@ -21,7 +21,7 @@ app.get('/auth/vk', function(req, res){
 
 app.get('/auth/vkontakte/callback', function(req, res) {
 	const code = req.query.code,
-		url = 'http://oauth.vk.com/access_token?client_id=7040403&client_secret=SJrmcvaarjNDIJnRm7qe&redirect_uri=http://bolart.ru&code=' + code;
+		url = 'https://oauth.vk.com/access_token?client_id=7040403&client_secret=SJrmcvaarjNDIJnRm7qe&redirect_uri=http://bolart.ru&code=' + code;
 
 	if (code === undefined) {
 		res.redirect('/');
