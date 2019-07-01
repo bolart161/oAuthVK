@@ -59,7 +59,6 @@ app.get('/auth/vk',
 app.get('/auth/vk/callback',
   passport.authenticate('vkontakte', { failureRedirect: '/login' }),
   function(req, res) {
-    console.log(res);
     res.redirect('/');
   });
 
@@ -71,6 +70,8 @@ app.get('/logout', function(req, res){
 app.listen(3000);
 
 function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
+  if (req.isAuthenticated()) {
+    return next();
+  }
   res.redirect('/login')
 }

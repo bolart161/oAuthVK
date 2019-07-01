@@ -1,15 +1,15 @@
 <% if (!user) { %>
 
-	<h2>Welcome! Please log in.</h2>
-    <a href="/auth/vk">Log in with VK</a>
+	<h2>Пожалуйста войдите</h2>
+    <a href="/auth/vk">Войти с VK</a>
 
 <% } else { %>
 
-	<h2>Hello, <%= user.displayName %>.</h2>
+	<h2>Привет, <%= user.displayName %>.</h2>
 
-    <p>VK ID: <%= user.id %></p>
-    <p>VK Username: <%= user.username %></p>
-    <p>VK Name: <%= user.displayName %></p>
+    <p>ID: <%= user.id %></p>
+    <p>Username: <%= user.username %></p>
+    <p>Name: <%= user.displayName %></p>
 
     <p>
     <pre>
@@ -18,7 +18,7 @@
     </p>
 
     <p>
-        <a href="/logout">Log out</a>
+        <a href="/logout">Выйти</a>
     </p>
 
 <% } %>

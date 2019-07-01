@@ -29,10 +29,10 @@ app.get('/auth/vkontakte/callback', cors(), function(req, res) {
 	console.log(code);
 	if (code !== undefined) {
 		console.log(req.query);
-		if (req.query.client_secret) {
+		if (req.query.access_token !== undefined) {
 			const url = 'https://oauth.vk.com/access_token?client_id=7040403&client_secret=SJrmcvaarjNDIJnRm7qe&redirect_uri=http://bolart.ru:3000/auth/vkontakte/callback&code=' + code;
 			// res.redirect(url);
-
+			console.log(req.query);
 			axios.get(url)
 				.then((response) => {
 					console.log(response.data);
