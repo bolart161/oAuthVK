@@ -32,24 +32,17 @@ app.get('/auth/vkontakte/callback', cors(), function(req, res) {
 			const url = 'https://oauth.vk.com/access_token?client_id=7040403&client_secret=SJrmcvaarjNDIJnRm7qe&redirect_uri=http://bolart.ru:3000/auth/vkontakte/callback&code=' + code;
 			// res.redirect(url);
 
-			let xhr = new XMLHttpRequest();
-			xhr.open('GET', url, false);
-			xhr.send();
-
-			if (xhr.status != 200) {
-				console.log(xhr.statusText);
-			}
-
-			// axios.get(url)
-			// 	.then((response) => {
-			// 		return response.data;
-			// 	})
-			// 	.then((data) => {
-			// 		token = data.access_token;
-			// 		id = data.user_id;
-			// 	})
-			// 	.catch(console.log('Error'));
+			axios.get(url)
+				.then((response) => {
+					return response.data;
+				})
+				.then((data) => {
+					token = data.access_token;
+					id = data.user_id;
+				})
+				.catch(console.log('Error'));
 		} else {
+			console.log('3')
 			res.sendStatus(200);
 		}
 	} else {
