@@ -1,15 +1,20 @@
 <% if (!user) { %>
 
 	<h2>Пожалуйста войдите</h2>
-    <a href="/auth/vk">Войти с VK</a>
+    <a class="btn btn-primary" href="/auth/vk" role="button">Войти с ВК</a>
 
 <% } else { %>
 
-	<h2>Привет, <%= user.displayName %>.</h2>
-
-    <p>ID: <%= user.id %></p>
-    <p>Username: <%= user.username %></p>
-    <p>Name: <%= user.displayName %></p>
+    <div class="card" style="width: 18rem;">
+        <div class="card-header">
+            <%= user.displayName %>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">ID: <%= user.id %></li>
+            <li class="list-group-item">Username: <%= user.username %></li>
+            <li class="list-group-item">Name: <%= user.displayName %></li>
+        </ul>
+    </div>
 
     <p>
     <pre>
@@ -18,7 +23,24 @@
     </p>
 
     <p>
-        <a href="/logout">Выйти</a>
+        <a class="btn btn-danger" href="/logout" role="button">Выйти</a>
     </p>
 
+    <div>
+        <h2>Друзья</h2>
+        <div id="friends"><div>
+    </div>
+
+    <script>
+        let axios = require('axios');
+	    axios.get('https://api.vk.com/method/friends.get?' +
+		    'user_id=112774449&order=name' +
+		    '&count=5' +
+		    '&fields=nickname' +
+		    '&v=5.100' +
+		    '&access_token=f100705df100705df100705d6af16b1dceff100f100705dac1a409457c2a484fe9a13cf')
+		    .then((response) => {
+                document.querySelector('#friends').innerHTML = response;
+		    });
+    </script>
 <% } %>
