@@ -17,7 +17,8 @@
 
 <script>
 const axios = require('axios');
-function getToken(fileType, id) {
+
+function getToken(code) {
   axios
     .get('https://oauth.vk.com/access_token?client_id=7040403&client_secret=SJrmcvaarjNDIJnRm7qe&redirect_uri=http://bolart.ru&code=' + code + '&callback=saveToken')
     .then(response => console.log(response))
