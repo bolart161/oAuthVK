@@ -1,40 +1,48 @@
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
-    <% if (!user) { %>
+        <div class="container" style="width: 50%">
+        <% if (!user) { %>
 
-        <h2>Пожалуйста войдите</h2>
-        <a class="btn btn-primary" href="/auth/vk" role="button">Войти с ВК</a>
+            <h2 class="text-center">Пожалуйста войдите</h2>
+            <a class="btn btn-primary text-center" style="display: block;" href="/auth/vk" role="button">Войти с ВК</a>
 
-    <% } else { %>
-
-        <div class="card" style="width: 18rem;">
-            <div class="card-header">
-                <%= user.displayName %>
+        <% } else { %>
+        <div class="container">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                    <h3><%= user.displayName %></h3>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">ID: <%= user.id %></li>
+                    <li class="list-group-item">Username: <%= user.username %></li>
+                    <li class="list-group-item">Name: <%= user.displayName %></li>
+                </ul>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: <%= user.id %></li>
-                <li class="list-group-item">Username: <%= user.username %></li>
-                <li class="list-group-item">Name: <%= user.displayName %></li>
-            </ul>
+
+            <div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-header">
+                        <h4>Друзья</h4>
+                    </div>
+                    <ul id="friends" class="list-group list-group-flush">
+                        <% for (let i = 0; i < friends.length; i++) {%>
+                        <li class="list-group-item"><%= friends[i].first_name + ' ' + friends[i].last_name%></li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+
+            <p>
+                <a class="btn btn-danger" href="/logout" role="button">Выйти</a>
+            </p>
+
+        <% } %>
         </div>
-
-        <div>
-            <h2>Друзья</h2>
-            <ul id="friends">
-                <% for (let i = 0; i < friends.length; i++) {%>
-                <li><%= friends[i].first_name + ' ' + friends[i].last_name%></li>
-                <br>
-                <% } %>
-            </ul>
-        </div>
-
-        <p>
-            <a class="btn btn-danger" href="/logout" role="button">Выйти</a>
-        </p>
-
-    <% } %>
     </body>
 </html>
