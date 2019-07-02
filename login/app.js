@@ -1,10 +1,10 @@
-let express = require('express')
-  , passport = require('passport')
-  , VkStrategy = require('passport-vkontakte').Strategy
-  , axios = require('axios');
+const express = require('express'),
+  passport = require('passport'),
+  VkStrategy = require('passport-vkontakte').Strategy,
+  axios = require('axios');
 
-let VK_APP_ID = '7040403';
-let VK_APP_SECRET = 'SJrmcvaarjNDIJnRm7qe';
+const VK_APP_ID = '7040403';
+const VK_APP_SECRET = 'SJrmcvaarjNDIJnRm7qe';
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -58,23 +58,10 @@ app.get('/', function(req, res){
   }
 });
 
-app.get('/account', ensureAuthenticated, function(req, res){
-  res.render('account', { user: req.user });
+app.get('/auth/vk', passport.authenticate('vkontakte'), function(req, res){
 });
 
-app.get('/login', function(req, res){
-  res.render('login', { user: req.user });
-});
-
-
-app.get('/auth/vk',
-  passport.authenticate('vkontakte'),
-  function(req, res){
-});
-
-app.get('/auth/vk/callback',
-  passport.authenticate('vkontakte', { failureRedirect: '/login' }),
-  function(req, res) {
+app.get('/auth/vk/callback', passport.authenticate('vkontakte'), function(req, res) {
     res.redirect('/');
 });
 
@@ -84,10 +71,3 @@ app.get('/logout', function(req, res){
 });
 
 app.listen(3000);
-
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/login')
-}
