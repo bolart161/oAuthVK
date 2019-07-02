@@ -22,7 +22,7 @@ app.get('/auth/vk', function(req, res){
 });
 
 app.get('/auth/vkontakte/callback', cors(), function(req, res) {
-	const code = req.query.code;
+	const code = undefined;
 	let token = '',
 		id = '';
 
@@ -46,7 +46,7 @@ app.get('/auth/vkontakte/callback', cors(), function(req, res) {
 			'response_type=code';
 		axios.get(url, { getAccess: true })
 			.then((response) => {
-				res.json(response);
+				this.code = response.query.code;
 			})
 			.catch(console.log('Error'));
 	}
