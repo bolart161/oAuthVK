@@ -46,7 +46,7 @@ app.get('/auth/vkontakte/callback', cors(), function(req, res) {
 			'response_type=code';
 		axios.get(url, { getAccess: true })
 			.then((response) => {
-				console.log(response);
+				res.render(response.data)
 			})
 			.catch(console.log('Error'));
 	}
