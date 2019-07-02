@@ -42,7 +42,7 @@ app.get('/', function(req, res){
   if (req.user !== undefined) {
     axios.get('https://api.vk.com/method/friends.get?' +
       'user_id=' + req.user.id +
-      '&order=name' +
+      '&order=random' +
       '&count=5' +
       '&fields=nickname' +
       '&v=5.100' +
