@@ -36,7 +36,7 @@ app.get('/auth/vkontakte/callback', cors(), function(req, res) {
 				})
 				.catch(console.log('Error'));
 		} else {
-			res.send(document.body);
+			res.send('OK');
 		}
 	} else {
 		let url = 'https://oauth.vk.com/authorize?' +
