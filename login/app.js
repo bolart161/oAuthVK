@@ -44,7 +44,7 @@ app.get('/', function(req, res){
       'user_id=' + req.user.id +
       '&order=random' +
       '&count=5' +
-      '&fields=nickname' +
+      '&fields=photo_50' +
       '&v=5.100' +
       '&access_token=f100705df100705df100705d6af16b1dceff100f100705dac1a409457c2a484fe9a13cf')
       .then(resp => {
